@@ -23,7 +23,6 @@ function Details(){
         .then(response => response.json())
         .then(data => {
             setMovie(data)
-            console.log(data)
         })
     }, [paramns.id])
 
