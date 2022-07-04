@@ -2,6 +2,8 @@ import { Container, MovieList, Movie } from "./style";
 import { useState, useEffect } from 'react';
 import { APIKEY } from '../../configs/apikey'
 import { Link } from 'react-router-dom'
+import buscarFilmes from "../../repositorios/repositorio";
+import baby from "../../repositorios/repositorio";
 
 function Home(){
 
@@ -14,10 +16,10 @@ function Home(){
         title: string
     }
 
+    const listaFilmes = () => buscarFilmes().then((response) => setMovies(response.results));
+
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${APIKEY}&language=en-US&page=1`)
-        .then(response => response.json())
-        .then(data => setMovies(data.results))
+        listaFilmes();
     }, [])
 
     return (
